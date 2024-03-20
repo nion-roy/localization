@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Localization</title>
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.bunny.net">
+		<link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+	</head>
+
+	<body>
+
+		<div class="container mb-5">
+			<div class="alert alert-success text-center mt-2">
+				<h2 class="fw-bold">Laravel 11 Localization</h2>
+			</div>
+		</div>
+
+
+		<div class="container">
+			@if (session()->has('success'))
+				<div class="col-12">
+					<div class="alert alert-success">
+						{{ session()->get('success') }}
+					</div>
+				</div>
+			@endif
+
+
+			<form action="{{ route('post.store') }}" method="post">
+				@csrf
+
+				<div class="row">
+					<div class="col-md-6">
+
+						<div class="form-gorup mb-3">
+							<label for="title" class="form-label">Title</label>
+							<input type="text" name="title" class="form-control @error('title') is-invalid @enderror"" id="title" placeholder="Enter title">
+							@error('title')
+								<div class="text-danger">{{ $message }}</div>
+							@enderror
+						</div>
+
+						<div class="form-gorup mb-3">
+							<label for="sub_title" class="form-label">Title Bangla</label>
+							<input type="text" name="sub_title" class="form-control" id="sub_title" placeholder="Enter title bangla">
+						</div>
+
+						<div class="form-gorup mb-3">
+							<label for="description" class="form-label">Description</label>
+							<input type="text" name="description" class="form-control" id="description" placeholder="Enter description">
+						</div>
+
+						<div class="form-gorup mb-3">
+							<label for="sub_description" class="form-label">Description Bangla</label>
+							<input type="text" name="sub_description" class="form-control" id="sub_description" placeholder="Enter description bangla">
+						</div>
+
+						<div class="form-gorup">
+							<a href="{{ route('post.index') }}" class="btn btn-danger">Back Home</a>
+							<button type="submit" class="btn btn-success">Add Now</button>
+						</div>
+					</div>
+				</div>
+
+			</form>
+
+
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+
+</html>
