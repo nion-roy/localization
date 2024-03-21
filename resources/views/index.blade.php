@@ -27,13 +27,15 @@
 		<div class="container">
 
 			<div class="d-flex align-items-center gap-1 mb-3">
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Select Language </button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">English</a></li>
-						<li><a class="dropdown-item" href="#">Bangla</a></li>
-					</ul>
-				</div>
+
+				<ul class="nav">
+					@if (session()->get('language') == 'bangla')
+						<li class="nav-item"><a class="btn btn-success text-white" href="{{ route('english.language') }}">English</a> </li>
+					@else
+						<li class="nav-item"><a class="btn btn-success text-white" href="{{ route('bangla.language') }}">বাংলা</a> </li>
+					@endif
+				</ul>
+
 
 				<a href="{{ route('post.create') }}" class="btn btn-success">Add Post</a>
 			</div>
@@ -50,13 +52,18 @@
 			@foreach ($posts as $post)
 				<div class="card mt-3">
 					<div class="card-body">
-						<h5 class="card-title">{{ $post->title }}</h5>
-						<p>{{ $post->description }}</p>
+						@if (session()->get('language') == 'bangla')
+							<h5 class="card-title">{{ $post->title_bn }}</h5>
+							<p>{{ $post->description_bn }}</p>
+						@else
+							<h5 class="card-title">{{ $post->title }}</h5>
+							<p>{{ $post->description }}</p>
+						@endif
+
 					</div>
 					<div class="card-footer">
 						<div class="d-flex align-items-center gap-1">
-							<a href="" class="btn btn-success">Edit</a>
-
+							<a href="{{ route('post.edit', $post->id) }}" class="btn btn-success">Edit</a>
 							<form action="{{ route('post.destroy', $post->id) }}" method="post">
 								@csrf
 								@method('DELETE')

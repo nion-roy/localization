@@ -9,7 +9,7 @@ class PostRepository implements PostRepositoryInterface
 {
   public function all()
   {
-    return Post::all();
+    return Post::latest('id')->get();
   }
 
   public function findId($id)
@@ -19,20 +19,16 @@ class PostRepository implements PostRepositoryInterface
 
   public function create(array $data)
   {
-    $post = Post::create($data);
-    return $post;
+    return Post::createPost((object)$data);
   }
-
 
   public function update($id, array $data)
   {
-    $post = Post::findOrFail($id);
-    $post->update($data);
-    return $post;
+    return Post::updatePost($id, (object) $data);
   }
 
   public function delete($id)
   {
-    return Post::destroy($id);
+    return Post::deletePost($id);
   }
 }

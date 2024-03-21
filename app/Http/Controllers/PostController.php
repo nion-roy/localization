@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\PostRequest;
 use App\Repositories\Interfaces\PostRepositoryInterface;
@@ -39,18 +38,12 @@ class PostController extends Controller
   public function edit($id)
   {
     $post = $this->postRepository->findId($id);
-    return view('create', compact('post'));
+    return view('edit', compact('post'));
   }
 
 
   public function update(PostRequest $request, $id)
   {
-    $post = $this->postRepository->findId($id);
-    $request->validate([
-      'title' => ['required', 'string', 'max:255', Rule::unique('posts')->ignore($post->id)],
-      'description' => 'required|string',
-    ]);
-
     $this->postRepository->update($id, $request->validated());
     return redirect()->back()->with('success', 'Post update successfully.');
   }
