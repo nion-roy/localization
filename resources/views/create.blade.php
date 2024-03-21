@@ -42,25 +42,34 @@
 
 						<div class="form-gorup mb-3">
 							<label for="title" class="form-label">Title</label>
-							<input type="text" name="title" class="form-control @error('title') is-invalid @enderror"" id="title" placeholder="Enter title">
+							<input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter title" value="{{ old('title') }}">
 							@error('title')
 								<div class="text-danger">{{ $message }}</div>
 							@enderror
 						</div>
 
 						<div class="form-gorup mb-3">
-							<label for="sub_title" class="form-label">Title Bangla</label>
-							<input type="text" name="sub_title" class="form-control" id="sub_title" placeholder="Enter title bangla">
+							<label for="title_bn" class="form-label">Title Bangla</label>
+							<input type="text" name="title_bn" class="form-control @error('title_bn') is-invalid @enderror" id="title_bn" placeholder="Enter bangla title" value="{{ old('title_bn') }}">
+							@error('title_bn')
+								<div class="text-danger">{{ $message }}</div>
+							@enderror
 						</div>
 
 						<div class="form-gorup mb-3">
 							<label for="description" class="form-label">Description</label>
-							<input type="text" name="description" class="form-control" id="description" placeholder="Enter description">
+							<textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" cols="30" rows="6" placeholder="Enter description">{{ old('description') }}</textarea>
+							@error('description')
+								<div class="text-danger">{{ $message }}</div>
+							@enderror
 						</div>
 
 						<div class="form-gorup mb-3">
-							<label for="sub_description" class="form-label">Description Bangla</label>
-							<input type="text" name="sub_description" class="form-control" id="sub_description" placeholder="Enter description bangla">
+							<label for="description_bn" class="form-label">Description Bangla</label>
+							<textarea name="description_bn" id="description_bn" class="form-control @error('description_bn') is-invalid @enderror" cols="30" rows="6" placeholder="Enter bangla description">{{ old('description_bn') }}</textarea>
+							@error('description_bn')
+								<div class="text-danger">{{ $message }}</div>
+							@enderror
 						</div>
 
 						<div class="form-gorup">
